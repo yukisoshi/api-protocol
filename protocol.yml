@@ -1,0 +1,25 @@
+openapi: "3.0.3"
+
+info:
+  title: "Holodule API"
+  version: "0.1"
+  description: "Holoduleから配信データを取得するためのAPI"
+
+servers:
+  - url: "http://localhost:8080"
+    description: "Test Env"
+
+paths:
+  /holodule:
+    get:
+     summary: Get Live schedule
+     responses:
+       '200':
+         description: OK
+         content:
+           application/json:
+            schema:
+             type: object
+             properties:
+               message:
+                type: string
