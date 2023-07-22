@@ -9,6 +9,29 @@ servers:
   - url: "http://localhost:8080"
     description: "Test Env"
 
+components:
+  schemas:
+    HoloduleResponse:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Live Title"
+        channel:
+          type: string
+          example: "Channel Title"
+        url:
+          type: string
+          example: "http://example.com/holodule/holodule"
+    ErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+        message:
+          type: string
+          example: "Your request is  bad"
+
 paths:
   /holodule:
     get:
