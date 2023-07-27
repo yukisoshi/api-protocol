@@ -1,0 +1,59 @@
+openapi: "3.0.3"
+
+info:
+  title: "Holodule API"
+  version: "0.1"
+  description: "Holoduleから配信データを取得するためのAPI"
+
+servers:
+  - url: "http://localhost:8080"
+    description: "Test Env"
+
+components:
+  schemas:
+    # 正常なリクエスト時のレスポンス
+    HoloduleResponse:
+      type: object
+      properties:
+        channel:
+          type: string
+          example: "Channel Title"
+        title:
+          type: string
+          example: "Live Title"
+        url:
+          type: string
+          example: "http://example.com/holodule/holodule"
+        isOnAir:
+          type: boolean
+          example: true # API使用時にライブ配信を行っていればtrue　それ以外はfalse
+    # 異常なリクエスト時のレスポンス
+    ErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+        message:
+          type: string
+          example: "Your request is  bad"
+
+paths:
+  /holodule:
+    get:
+      summary: Get Live schedule
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/HoloduleResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
